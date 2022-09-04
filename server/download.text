@@ -1,0 +1,21 @@
+client에서 다운 받아야 할것
+
+1.익스 프레스
+-express
+2.moogose 
+3.multer
+https://www.npmjs.com/package/multer
+npm install --save multer
+const multer  = require('multer')
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '/tmp/my-uploads')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null, file.fieldname + '-' + uniqueSuffix)
+  }
+})
+
+const upload = multer({ storage: storage })
+4.nodemon
