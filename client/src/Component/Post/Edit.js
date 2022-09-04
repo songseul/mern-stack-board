@@ -58,7 +58,7 @@ function Edit() {
   useEffect(() => {
     setTitle(postInfo.title);
     setContent(postInfo.content);
-    console.log(image);
+    console.log(postInfo.image);
     setImage(postInfo.image);
   }, [postInfo]);
 

@@ -5,6 +5,9 @@ import Heading from './Component/Heading';
 import Upload from './Component/Post/Upload';
 import Detail from './Component/Post/Detail';
 import Edit from './Component/Post/Edit';
+import Login from './Component/User/Login';
+import Register from './Component/User/Register';
+
 function App() {
   // 자식 컴포넌트 들이 공통으로 공유되는 state를 props로 넘기면 된다
   //(상태 동일하게 저장됨)
@@ -23,6 +26,8 @@ function App() {
         />
         <Route path="/post/:postNum" element={<Detail />} />
         <Route path="/edit/:postNum" element={<Edit />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );
