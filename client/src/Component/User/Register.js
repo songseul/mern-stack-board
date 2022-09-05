@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginDiv from '../../Style/UserCSS';
-import firebase from '../../firebase';
+import firebase from '../../firebase.js';
 import axios from 'axios';
 
 function Register() {

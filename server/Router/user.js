@@ -6,6 +6,7 @@ const { Counter } = require('../Model/Counter.js');
 router.post('/register', (req, res) => {
   temp = req.body;
   Counter.findOne({ name: 'counter' })
+    .exec()
     .then(counter => {
       temp.userNum = counter.userNum;
       console.log(temp);

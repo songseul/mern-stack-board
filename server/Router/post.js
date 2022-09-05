@@ -1,24 +1,36 @@
 var express = require('express');
 var router = express.Router();
+const multer = require('multer');
 const { Post } = require('../Model/Post.js');
 const { Counter } = require('../Model/Counter.js');
-const multer = require('multer');
+const { User } = require('../Model/User.js');
 
 router.post('/submit', (req, res) => {
-  let temp = req.body;
+  let temp = {
+    title: req.body.title,
+    content: req.body.content,
+    image: req.body.image,
+    uid: req.body.uid,
+  };
   Counter.findOne({ name: 'counter' })
     .exec()
     .then(counter => {
       temp.postNum = counter.postNum;
-      console.log(temp);
-      const CommunityPost = new Post(temp);
-      CommunityPost.save().then(() => {
-        Counter.updateOne({ name: 'counter' }, { $inc: { postNum: 1 } }).then(
-          () => {
-            res.status(200).json({ success: true });
-          }
-        );
-      });
+      User.findOne({ uid: temp.uid })
+        .exec()
+        .then(userInfo => {
+          temp.author = userInfo._id;
+          console.log(temp);
+          const CommunityPost = new Post(temp);
+          CommunityPost.save().then(doc => {
+            Counter.updateOne(
+              { name: 'counter' },
+              { $inc: { postNum: 1 } }
+            ).then(() => {
+              res.status(200).json({ success: true });
+            });
+          });
+        });
     })
     .catch(err => {
       res.status(400).json({ success: false });
