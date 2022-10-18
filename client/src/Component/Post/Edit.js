@@ -11,7 +11,7 @@ function Edit() {
   const [postInfo, setPostInfo] = useState({});
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [image, setImage] = useState(`http://localhost:4000/${postInfo.image}`);
+  const [image, setImage] = useState(``);
   useEffect(() => {
     let body = {
       postNum: params.postNum,
@@ -76,7 +76,7 @@ function Edit() {
         />
         <label htmlFor="content"> 내용 </label>
 
-        <ImageUpload onChange={e => setImage(e)} />
+        <ImageUpload setImage={setImage} />
         <textarea
           placeholder=" 수정할 내용을 적어주세요"
           id="content"

@@ -59,4 +59,13 @@ const BtnDiv = styled.div`
   }
 `;
 
-export { PostBox, BtnDiv, PostDiv };
+const SpinnerDiv = styled.div`
+  width: 100%;
+  height: calc(100vh - 2rem);
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+`;
+
+export { PostBox, BtnDiv, PostDiv, SpinnerDiv };

@@ -20,7 +20,6 @@ router.post('/submit', (req, res) => {
         .exec()
         .then(userInfo => {
           temp.author = userInfo._id;
-          console.log(temp);
           const CommunityPost = new Post(temp);
           CommunityPost.save().then(doc => {
             Counter.updateOne(
@@ -39,34 +38,37 @@ router.post('/submit', (req, res) => {
 
 router.post('/list', (req, res) => {
   Post.find()
+    .populate('author')
     .exec()
     .then(doc => {
       res.status(200).json({ success: true, postList: doc });
     })
-    .catch(err => res.stautus(400).json({ success: false }));
+    .catch(err => res.status(400).json({ success: false }));
 });
 
 router.post('/detail', (req, res) => {
   Post.findOne({ postNum: Number(req.body.postNum) })
+    .populate('author')
     .exec()
     .then(doc => {
       console.log(doc);
       res.status(200).json({ success: true, postDetail: doc });
     })
-    .catch(err => res.stautus(400).json({ success: false }));
+    .catch(err => res.status(400).json({ success: false }));
 });
 
 router.post('/edit', (req, res) => {
   let temp = {
     title: req.body.title,
     content: req.body.content,
+    image: req.body.image,
   };
   Post.updateOne({ postNum: Number(req.body.postNum) }, { $set: temp })
     .exec()
     .then(() => {
       res.status(200).json({ success: true });
     })
-    .catch(err => res.stautus(400).json({ success: false }));
+    .catch(err => res.status(400).json({ success: false }));
 });
 
 router.post('/delete', (req, res) => {

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { UploadDiv, UploadButtonDiv, UploadForm } from '../../Style/UploadCSS';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+
 import ImageUpload from './ImageUpload';
 
 function Upload() {
@@ -11,13 +12,19 @@ function Upload() {
   const [image, setImage] = useState();
 
   const navigate = useNavigate();
-  const user = useSelector(state => state.user);
+  // console.log('accessToken', user.accessToken);
 
-  useEffect(() => {
-    if (!user.accessToken) {
+  const user = useSelector(state => state.user);
+  const userToken = () => {
+    console.log(user.accessToken);
+    if (user.accessToken == null) {
       alert('로그인한 회원만 글을 작성 할 수 있습니다');
       navigate('/login');
     }
+  };
+
+  useEffect(() => {
+    userToken();
   }, []);
 
   const onSubmit = e => {

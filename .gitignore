@@ -1,8 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+server/config
 server/config/dev.js
 server/node_modules
 server/package-lock.js
 client/node_modules
+client/firebase.js
 client/package-lock.js
 # dependencies
 /node_modules

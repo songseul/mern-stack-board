@@ -9,7 +9,6 @@ function List() {
     axios
       .post('/api/post/list')
       .then(res => {
-        console.log(res.data);
         const list = res.data.postList;
         if (res.data.success) {
           setPostList([...list]);
@@ -26,6 +25,7 @@ function List() {
           <Link to={`/post/${el.postNum}`}>
             <ListItem key={idx}>
               <p className="title"> {el.title}</p>
+              <p> {el.author.displayName}</p>
               <p>{el.content}</p>
             </ListItem>
           </Link>

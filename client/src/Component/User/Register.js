@@ -11,9 +11,13 @@ function Register() {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [flag, setFlag] = useState(false);
+  //데이터에 같은 이름이 있는지 axio로 보내는 상태값
+  const [nameCheck, setNameCheck] = useState(false);
+  //중복된 이름인지 아닌지 유효성 메세지
+  const [nameInfo, setNameInfo] = useState('');
+
   //firebase 를 사용 하는 동안은 app이 멈춰있어야 하기 떄문에
   //async await 을 사용 합니다
-
   const RegisterHandler = async e => {
     setFlag(true);
     e.preventDefault();
@@ -26,11 +30,17 @@ function Register() {
     } else if (password.length < 6) {
       return alert('비밀번호는 최소 6자리 이상 이어야 합니다.');
     }
-
+    if (!nameCheck) {
+      return alert('닉네임 중복검사를 진행해 주세요');
+    }
     let createdUser = await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password);
-    await createdUser.user.updateProfile({ displayName: name });
+    await createdUser.user.updateProfile({
+      displayName: name,
+      photoURL:
+        'https://static-media-prod-cdn.itsre-sumo.mozilla.net/static/default-FFA-avatar.2f8c2a0592bda1c5.png',
+    });
 
     console.log(createdUser.user);
 
@@ -38,6 +48,8 @@ function Register() {
       email: createdUser.user.multiFactor.user.email,
       displayName: createdUser.user.multiFactor.user.displayName,
       uid: createdUser.user.multiFactor.user.uid,
+      photoURL:
+        'https://static-media-prod-cdn.itsre-sumo.mozilla.net/static/default-FFA-avatar.2f8c2a0592bda1c5.png',
     };
     axios.post('/api/user/register', body).then(res => {
       setFlag(false);
@@ -52,15 +64,38 @@ function Register() {
     });
   };
 
+  const nameCheckHandler = e => {
+    e.preventDefault();
+    if (!name) {
+      alert('닉네임을 입력해 주세요.');
+    }
+    let body = {
+      displayName: name,
+    };
+    axios.post('/api/user/namecheck', body).then(res => {
+      if (res.data.success) {
+        if (res.data.check) {
+          setNameCheck(true);
+          setNameInfo('사용가능한 닉네임 입니다.');
+        } else {
+          setNameInfo('사용불가능한 닉네임입니다.');
+        }
+      }
+    });
+  };
+
   return (
     <LoginDiv>
       <form>
-        <label htmlFor=""> 이름</label>
+        <label htmlFor=""> 닉네임</label>
         <input
           type="name"
           value={name}
           onChange={e => setName(e.target.value)}
+          disabled={nameCheck}
         />
+        {nameInfo}
+        <button onClick={e => nameCheckHandler(e)}> 닉네임 중복검사 </button>
         <label htmlFor=""> 이메일</label>
         <input
           type="email"
