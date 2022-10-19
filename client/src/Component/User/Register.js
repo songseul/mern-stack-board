@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import LoginDiv from '../../Style/UserCSS';
 import firebase from '../../firebase.js';
 import axios from 'axios';
+import DefaultAvatar from '../../assets/avatardefault.png';
 
 function Register() {
   const navigate = useNavigate();

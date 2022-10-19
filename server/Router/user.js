@@ -2,13 +2,14 @@ var express = require('express');
 var router = express.Router();
 const { User } = require('../Model/User.js');
 const { Counter } = require('../Model/Counter.js');
+const multer = require('multer');
 
 router.post('/register', (req, res) => {
   let temp = req.body;
   Counter.findOne({ name: 'counter' })
     .exec()
-    .then(counter => {
-      temp.userNum = counter.userNum;
+    .then(doc => {
+      temp.userNum = doc.userNum;
       console.log(temp);
       const userData = new User(temp);
       userData.save().then(() => {
@@ -42,7 +43,7 @@ router.post('/nameCheck', (req, res) => {
 //프로필 업로드
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './assets');
+    cb(null, './static');
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
