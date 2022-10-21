@@ -2,10 +2,11 @@
 server/config
 server/config/dev.js
 server/node_modules
-server/package-lock.js
+server/package-lock.json
 client/node_modules
 client/src/firebase.js 
-client/package-lock.js
+client/package-lock.json
+
 # dependencies
 /node_modules
 /.pnp

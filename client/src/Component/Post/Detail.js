@@ -38,7 +38,7 @@ function Detail(props) {
           <Avartar
             round={true}
             size="40"
-            src={props.postInfo.author.photoURL}
+            src={`http://localhost:4000/${props.postInfo.author.photoURL}`}
             style={{ border: '1px solid #c6c6c6' }}
           />
           <p> {props.postInfo.author.displayName}</p>

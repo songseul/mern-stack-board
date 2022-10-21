@@ -3,7 +3,6 @@ var router = express.Router();
 const { User } = require('../Model/User.js');
 const { Counter } = require('../Model/Counter.js');
 const multer = require('multer');
-
 router.post('/register', (req, res) => {
   let temp = req.body;
   Counter.findOne({ name: 'counter' })
@@ -43,7 +42,7 @@ router.post('/nameCheck', (req, res) => {
 //프로필 업로드
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './static');
+    cb(null, './image');
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
@@ -53,15 +52,28 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage }).single('file');
 
-router.post('/profile/upload', (req, res) => {
+router.post('/profile/img', (req, res) => {
   upload(req, res, err => {
     if (err) {
       res.status(400).json({ success: false });
     } else {
-      // console.log(res.req.file);
       res.status(200).json({ success: true, filePath: res.req.file.path });
     }
   });
+});
+
+router.post('/profile/update', (req, res) => {
+  let temp = {
+    photoURL: req.body.photoURL,
+  };
+  User.updateOne({ uid: req.body.uid }, { $set: temp })
+    .exec()
+    .then(() => {
+      res.status(200).json({ success: true });
+    })
+    .catch(err => {
+      res.status(400).json({ success: false });
+    });
 });
 
 module.exports = router;

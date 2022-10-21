@@ -59,7 +59,7 @@ function RepleContent(props) {
           <Avartar
             round={true}
             size="30"
-            src={props.reple.author.photoURL}
+            src={`http://localhost:4000/${props.reple.author.photoURL}`}
             style={{ border: '1px solid #c6c6c6' }}
           />
           <p> {props.reple.author.displayName} </p>

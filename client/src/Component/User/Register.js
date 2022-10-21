@@ -38,8 +38,7 @@ function Register() {
       .createUserWithEmailAndPassword(email, password);
     await createdUser.user.updateProfile({
       displayName: name,
-      photoURL:
-        'https://static-media-prod-cdn.itsre-sumo.mozilla.net/static/default-FFA-avatar.2f8c2a0592bda1c5.png',
+      photoURL: `http://localhost:4000/image/default-profile.jpeg`,
     });
 
     console.log(createdUser.user);
@@ -48,8 +47,7 @@ function Register() {
       email: createdUser.user.multiFactor.user.email,
       displayName: createdUser.user.multiFactor.user.displayName,
       uid: createdUser.user.multiFactor.user.uid,
-      photoURL:
-        'https://static-media-prod-cdn.itsre-sumo.mozilla.net/static/default-FFA-avatar.2f8c2a0592bda1c5.png',
+      photoURL: `http://localhost:4000/image/default-profile.jpeg`,
     };
     axios.post('/api/user/register', body).then(res => {
       setFlag(false);
