@@ -16,6 +16,29 @@ const PostBox = styled.div`
   margin-bottom: 5vh;
   padding: 20px;
   box-shadow: 0px 19px 28px rgba(0, 0, 0, 0.3), 0px 15px 12px rgba(0, 0, 0, 0.1);
+  h1 {
+    font-weight: bold;
+  }
+  p {
+    margin-bottom: 0px;
+  }
+  .author {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  margin-bottom: 10px;
+    p {
+      color: darkgrey;
+      margin-bottom: 0px;
+      margin-left: 10px;
+      &.time {
+        font-size: 10px;
+      }
+      &.admin {
+        display: flex;
+        align-items: center;
+      }
+    }
   @media (max-width: 756px) {
     width: 90%;
   }

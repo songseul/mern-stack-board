@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import LoginDiv from '../../Style/UserCSS';
 import { useNavigate } from 'react-router-dom';
 import firebase from '../../firebase';
+import { useSelector } from 'react-redux';
 
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errMessage, setErrMessage] = useState('');
+  const user = useSelector(state => state.user);
 
   const SignHandler = async e => {
     e.preventDefault();
@@ -16,6 +18,7 @@ function Login() {
     }
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
+      localStorage.setItem('accessToken', user.accessToken);
       navigate('/');
     } catch (err) {
       console.log(err.code);

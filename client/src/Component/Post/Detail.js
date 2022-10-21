@@ -3,6 +3,7 @@ import React from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { PostBox, BtnDiv, PostDiv } from '../../Style/DetailListCSS';
 import { useSelector } from 'react-redux';
+import Avartar from 'react-avatar';
 
 function Detail(props) {
   const params = useParams();
@@ -32,8 +33,16 @@ function Detail(props) {
   return (
     <PostDiv>
       <PostBox>
-        <div className="title"> {props.postInfo.title}</div>
-        <h3>{props.postInfo.author.displayName}</h3>
+        <h1>{props.postInfo.title} </h1>
+        <div className="author">
+          <Avartar
+            round={true}
+            size="40"
+            src={props.postInfo.author.photoURL}
+            style={{ border: '1px solid #c6c6c6' }}
+          />
+          <p> {props.postInfo.author.displayName}</p>
+        </div>
         <div>
           {props.postInfo.image ? (
             <img

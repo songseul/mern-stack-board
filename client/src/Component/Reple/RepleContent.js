@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { RepleContentDiv, RepleUploadDiv } from '../../Style/RepleCSS';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import Avartar from 'react-avatar';
 
 function RepleContent(props) {
   const [modalFlag, setModalFlag] = useState(false);
@@ -54,7 +55,15 @@ function RepleContent(props) {
   return (
     <RepleContentDiv>
       <div className="author">
-        <p>{props.reple.author.displayName} </p>
+        <div className="userInfo">
+          <Avartar
+            round={true}
+            size="30"
+            src={props.reple.author.photoURL}
+            style={{ border: '1px solid #c6c6c6' }}
+          />
+          <p> {props.reple.author.displayName} </p>
+        </div>
         {
           (props.reple.author.uid = user.uid && (
             <div className="modalControl">

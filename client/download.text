@@ -19,3 +19,5 @@ https://emotion.sh/docs/introduction
 
 npm i axios --save
 npm i react-router-dom
+
+npm i react-avatar --save

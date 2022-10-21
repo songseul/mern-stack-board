@@ -6,8 +6,10 @@ import firebase from '../firebase.js';
 function Heading() {
   const navigate = useNavigate();
   const user = useSelector(state => state.user);
+
   const LogoutHandler = () => {
     firebase.auth().signOut();
+    localStorage.clear();
     navigate('/');
   };
   return (
@@ -22,13 +24,33 @@ function Heading() {
           </Nav>
         </Navbar.Collapse>
         <Navbar.Collapse className="justify-content-end">
-          {user.accessToken ? (
-            <Navbar.Text
-              style={{ cursor: 'pointer' }}
-              onClick={() => LogoutHandler()}
-            >
-              Logout
-            </Navbar.Text>
+          {localStorage.accessToken ? (
+            <>
+              <Navbar.Text
+                style={{
+                  cursor: 'pointer',
+                  marginRight: '10px',
+                }}
+              >
+                <Link
+                  to="/mypage"
+                  style={{
+                    color: '#aaa',
+                    textDecoration: 'none',
+                    marginRight: '10px',
+                  }}
+                >
+                  MyPage{' '}
+                </Link>{' '}
+                <br />
+              </Navbar.Text>
+              <Navbar.Text
+                style={{ cursor: 'pointer' }}
+                onClick={() => LogoutHandler()}
+              >
+                Logout
+              </Navbar.Text>
+            </>
           ) : (
             <Link
               to="/login"

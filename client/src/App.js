@@ -10,6 +10,7 @@ import PostArea from './Component/Post/PostArea';
 import Edit from './Component/Post/Edit';
 import Login from './Component/User/Login';
 import Register from './Component/User/Register';
+import MyPage from './Component/User/MyPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ function App() {
         <Route path="/edit/:postNum" element={<Edit />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/mypage" element={<MyPage />} />
       </Routes>
     </div>
   );

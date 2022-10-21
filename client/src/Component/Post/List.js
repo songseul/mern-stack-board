@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { ListDiv, ListItem } from '../../Style/ListCSS';
-//axios 라이브러리 다운
+import Avartar from 'react-avatar';
+
 function List() {
   const [postList, setPostList] = useState([]);
   useEffect(() => {
@@ -25,7 +26,18 @@ function List() {
           <Link to={`/post/${el.postNum}`}>
             <ListItem key={idx}>
               <p className="title"> {el.title}</p>
-              <p> {el.author.displayName}</p>
+              <div className="author">
+                <div>
+                  <Avartar
+                    round={true}
+                    size="40"
+                    src={el.author.photoURL}
+                    style={{ border: '1px solid #c6c6c6' }}
+                  />
+                  <p> {el.author.displayName}</p>
+                </div>
+                <p className="time"> {} </p>
+              </div>
               <p>{el.content}</p>
             </ListItem>
           </Link>
