@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const app = express();
 const port = process.env.PORT || 4000;
 const config = require('./server/config/key.js');
-//mongodb+srv://juliasong:song37@youtubeclone.gw6e57b.mongodb.net/?retryWrites=true&w=majority
+
 app.use(express.static(path.join(__dirname, './client/build')));
 app.use('/image', express.static('./image'));
 app.use(express.json());
