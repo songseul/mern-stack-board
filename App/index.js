@@ -5,15 +5,15 @@ const path = require('path');
 const mongoose = require('mongoose');
 const app = express();
 const port = process.env.PORT || 4000;
-const config = require('./config/key.js');
+const config = require('./server/config/key.js');
 //mongodb+srv://juliasong:song37@youtubeclone.gw6e57b.mongodb.net/?retryWrites=true&w=majority
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(express.static(path.join(__dirname, './client/build')));
 app.use('/image', express.static('./image'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/api/post', require('./Router/post.js'));
-app.use('/api/user', require('./Router/user.js'));
-app.use('/api/reple', require('./Router/reple.js'));
+app.use('/api/post', require('./server/Router/post.js'));
+app.use('/api/user', require('./server/Router/user.js'));
+app.use('/api/reple', require('./server/Router/reple.js'));
 app.listen(port, () => {
   mongoose
     .connect(config.mongoURI)
@@ -27,11 +27,11 @@ app.listen(port, () => {
 });
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+  res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+  res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
 
 /*
