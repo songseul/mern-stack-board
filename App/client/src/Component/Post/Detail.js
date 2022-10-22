@@ -11,7 +11,7 @@ function Detail(props) {
   const params = useParams();
   const navigate = useNavigate();
   const user = useSelector(state => state.user);
-  console.log(props);
+
   const DeleteHandler = () => {
     if (window.confirm('정말로 게시물을 삭제 하시 겠습니까?')) {
       let body = {

@@ -20,11 +20,9 @@ function MyPage() {
   }, [user]);
 
   const ImageUpload = e => {
-    // console.log(e.target.files);
     let formData = new FormData();
     formData.append('file', e.target.files[0]);
     axios.post('/api/user/profile/img', formData).then(response => {
-      console.log(response.data.filePath);
       setCurrentImage(response.data.filePath);
     });
   };
@@ -76,7 +74,6 @@ function MyPage() {
             src={`https://react-board-community.herokuapp.com/${currentImage}`}
             style={{ border: '1px solid #c6c6c6', cursor: 'pointer' }}
           />
-          {console.log(currentImage)}
         </label>
         <button
           onClick={e => {

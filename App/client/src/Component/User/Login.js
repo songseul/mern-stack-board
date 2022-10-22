@@ -21,7 +21,6 @@ function Login() {
       localStorage.setItem('accessToken', user.accessToken);
       navigate('/');
     } catch (err) {
-      console.log(err.code);
       if (err.code === 'auth/user-not-found') {
         setErrMessage('존재하지 않는 이메일 입니다');
       } else if (err.code === 'auth/wrong.password') {

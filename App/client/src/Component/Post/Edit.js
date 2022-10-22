@@ -25,9 +25,7 @@ function Edit() {
           alert('내용을 불러오는데 실패 했습니다');
         }
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(err => {});
   }, [params.postNum]);
   const onSubmit = e => {
     e.preventDefault();
@@ -58,7 +56,6 @@ function Edit() {
   useEffect(() => {
     setTitle(postInfo.title);
     setContent(postInfo.content);
-    console.log(postInfo.image);
     setImage(postInfo.image);
   }, [postInfo]);
 

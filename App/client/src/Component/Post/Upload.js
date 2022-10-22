@@ -12,7 +12,6 @@ function Upload() {
   const [image, setImage] = useState();
 
   const navigate = useNavigate();
-  // console.log('accessToken', user.accessToken);
 
   const user = useSelector(state => state.user);
   const userToken = () => {

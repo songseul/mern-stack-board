@@ -26,7 +26,7 @@ function List({ postList }) {
                   <Avartar
                     round={true}
                     size="40"
-                    src={`http://localhost:4000/${el.author.photoURL}`}
+                    src={`https://react-board-community.herokuapp.com//${el.author.photoURL}`}
                     style={{ border: '1px solid #c6c6c6' }}
                   />
                   <p> {el.author.displayName}</p>

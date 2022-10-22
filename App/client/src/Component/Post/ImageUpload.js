@@ -11,7 +11,6 @@ function ImageUpload({ setImage }) {
   */
 
   const fileUploadHandler = e => {
-    console.log(e.target.files);
     let formData = new FormData();
     formData.append('file', e.target.files[0]);
     axios.post('/api/post/image/upload', formData).then(response => {
