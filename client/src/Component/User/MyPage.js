@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import Avartar from 'react-avatar';
 import axios from 'axios';
 import firebase from '../../firebase.js';
+import { MyPageDiv } from '../../Style/UserCSS.js';
 
 function MyPage() {
   const [currentImage, setCurrentImage] = useState('');
@@ -51,7 +52,7 @@ function MyPage() {
   };
 
   return (
-    <div>
+    <MyPageDiv>
       <form
         style={{
           width: '50%',
@@ -86,7 +87,7 @@ function MyPage() {
           저장
         </button>
       </form>
-    </div>
+    </MyPageDiv>
   );
 }
 

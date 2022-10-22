@@ -3,6 +3,8 @@ import { RepleContentDiv, RepleUploadDiv } from '../../Style/RepleCSS';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import Avartar from 'react-avatar';
+import moment from 'moment';
+import 'moment/locale/ko';
 
 function RepleContent(props) {
   const [modalFlag, setModalFlag] = useState(false);
@@ -51,7 +53,13 @@ function RepleContent(props) {
         });
     }
   };
-
+  const setTime = (a, b) => {
+    if (a !== b) {
+      return moment(b).format('YYYY년 MMMM Do, hh:mm') + '(수정됨)';
+    } else {
+      return moment(a).format('YYYY년 MMMM Do, hh:mm');
+    }
+  };
   return (
     <RepleContentDiv>
       <div className="author">
@@ -63,6 +71,7 @@ function RepleContent(props) {
             style={{ border: '1px solid #c6c6c6' }}
           />
           <p> {props.reple.author.displayName} </p>
+          <p> {setTime(props.reple.createdAt, props.reple.updatedAt)}</p>
         </div>
         {
           (props.reple.author.uid = user.uid && (

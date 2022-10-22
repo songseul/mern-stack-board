@@ -21,3 +21,5 @@ npm i axios --save
 npm i react-router-dom
 
 npm i react-avatar --save
+ npm install moment --save
+=> moment().format('MMMM Do YYYY, h:mm:ss a');

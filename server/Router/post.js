@@ -37,8 +37,23 @@ router.post('/submit', (req, res) => {
 });
 
 router.post('/list', (req, res) => {
-  Post.find()
+  let sort = {};
+  if (req.body.sort === '최신순') {
+    sort.createdAt = -1;
+  } else {
+    sort.repleNum = -1;
+  }
+  Post.find({
+    // 파인드에서 위 필터 검색 말고도 검색어로 필터링 기능 or 이용해서 추가
+    $or: [
+      { title: { $regex: req.body.searchTerm } },
+      { content: { $regex: req.body.searchTerm } },
+    ],
+  })
     .populate('author')
+    .sort(sort) // 검색어나 최신순,인기순으로 솔트
+    .skip(req.body.skip)
+    .limit(5) // 한번에 찾을 doc 숫자
     .exec()
     .then(doc => {
       res.status(200).json({ success: true, postList: doc });

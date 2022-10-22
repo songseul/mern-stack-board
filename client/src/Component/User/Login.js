@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import LoginDiv from '../../Style/UserCSS';
+import { LoginDiv } from '../../Style/UserCSS';
 import { useNavigate } from 'react-router-dom';
 import firebase from '../../firebase';
 import { useSelector } from 'react-redux';

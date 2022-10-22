@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LoginDiv from '../../Style/UserCSS';
+import { LoginDiv } from '../../Style/UserCSS';
 import firebase from '../../firebase.js';
 import axios from 'axios';
 
@@ -38,7 +38,7 @@ function Register() {
       .createUserWithEmailAndPassword(email, password);
     await createdUser.user.updateProfile({
       displayName: name,
-      photoURL: `http://localhost:4000/image/default-profile.jpeg`,
+      photoURL: `https://i.pinimg.com/550x/18/b9/ff/18b9ffb2a8a791d50213a9d595c4dd52.jpg`,
     });
 
     console.log(createdUser.user);
@@ -47,7 +47,7 @@ function Register() {
       email: createdUser.user.multiFactor.user.email,
       displayName: createdUser.user.multiFactor.user.displayName,
       uid: createdUser.user.multiFactor.user.uid,
-      photoURL: `http://localhost:4000/image/default-profile.jpeg`,
+      photoURL: `https://i.pinimg.com/550x/18/b9/ff/18b9ffb2a8a791d50213a9d595c4dd52.jpg`,
     };
     axios.post('/api/user/register', body).then(res => {
       setFlag(false);

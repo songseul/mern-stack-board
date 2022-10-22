@@ -4,6 +4,8 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { PostBox, BtnDiv, PostDiv } from '../../Style/DetailListCSS';
 import { useSelector } from 'react-redux';
 import Avartar from 'react-avatar';
+import moment from 'moment';
+import 'moment/locale/ko';
 
 function Detail(props) {
   const params = useParams();
@@ -30,6 +32,15 @@ function Detail(props) {
       alert('취소 되었습니다');
     }
   };
+
+  const setTime = (a, b) => {
+    if (a !== b) {
+      return moment(b).format('YYYY년 MMMM Do, hh:mm') + '(수정됨)';
+    } else {
+      return moment(a).format('YYYY년 MMMM Do, hh:mm');
+    }
+  };
+
   return (
     <PostDiv>
       <PostBox>
@@ -42,6 +53,9 @@ function Detail(props) {
             style={{ border: '1px solid #c6c6c6' }}
           />
           <p> {props.postInfo.author.displayName}</p>
+          <p className="time">
+            {setTime(props.postInfo.createdAt, props.postInfo.updatedAt)}
+          </p>
         </div>
         <div>
           {props.postInfo.image ? (
