@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoginDiv } from '../../Style/UserCSS';
 import firebase from '../../firebase.js';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 function Register() {
@@ -15,16 +16,28 @@ function Register() {
   const [nameCheck, setNameCheck] = useState(false);
   //중복된 이름인지 아닌지 유효성 메세지
   const [nameInfo, setNameInfo] = useState('');
+  const user = useSelector(state => state.user);
 
   //firebase 를 사용 하는 동안은 app이 멈춰있어야 하기 떄문에
   //async await 을 사용 합니다
+  const reload = () => {
+    window.location.reload();
+  };
+
   const RegisterHandler = async e => {
-    setFlag(true);
+    if (!flag) {
+      setFlag(false);
+    } else {
+      setFlag(true);
+    }
+
     e.preventDefault();
     if (!(name && email && password && passwordConfirm)) {
       return alert('모든 사항을 입력하시오');
     }
-
+    if (!email.includes('@')) {
+      return alert('이메일 양식을 맞춰 적어 주세요');
+    }
     if (password !== passwordConfirm) {
       return alert('비밀번호와 비밀번호 확인 값은 같아야 합니다');
     } else if (password.length < 6) {
@@ -33,6 +46,7 @@ function Register() {
     if (!nameCheck) {
       return alert('닉네임 중복검사를 진행해 주세요');
     }
+
     let createdUser = await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password);
@@ -66,6 +80,7 @@ function Register() {
     e.preventDefault();
     if (!name) {
       alert('닉네임을 입력해 주세요.');
+      nameCheck(true);
     }
     let body = {
       displayName: name,
@@ -114,7 +129,7 @@ function Register() {
           value={passwordConfirm}
           onChange={e => setPasswordConfirm(e.target.value)}
         />
-        <button type="submit" onClick={RegisterHandler} disabled={flag}>
+        <button type="submit" onClick={e => RegisterHandler(e)} disabled={flag}>
           회원가입
         </button>
       </form>
