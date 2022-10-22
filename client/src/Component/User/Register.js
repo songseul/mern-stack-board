@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoginDiv } from '../../Style/UserCSS';
 import firebase from '../../firebase.js';
-import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 function Register() {
@@ -16,13 +15,8 @@ function Register() {
   const [nameCheck, setNameCheck] = useState(false);
   //중복된 이름인지 아닌지 유효성 메세지
   const [nameInfo, setNameInfo] = useState('');
-  const user = useSelector(state => state.user);
-
   //firebase 를 사용 하는 동안은 app이 멈춰있어야 하기 떄문에
   //async await 을 사용 합니다
-  const reload = () => {
-    window.location.reload();
-  };
 
   const RegisterHandler = async e => {
     if (!flag) {

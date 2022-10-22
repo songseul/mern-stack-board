@@ -4,7 +4,7 @@ const path = require('path');
 //mongoose 라이브러리 다운
 const mongoose = require('mongoose');
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 const config = require('./config/key.js');
 //mongodb+srv://juliasong:song37@youtubeclone.gw6e57b.mongodb.net/?retryWrites=true&w=majority
 app.use(express.static(path.join(__dirname, '../client/build')));
