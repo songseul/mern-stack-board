@@ -49,7 +49,7 @@ function Detail(props) {
           <Avartar
             round={true}
             size="40"
-            src={`http://localhost:4000/${props.postInfo.author.photoURL}`}
+            src={`https://react-board-community.herokuapp.com/${props.postInfo.author.photoURL}`}
             style={{ border: '1px solid #c6c6c6' }}
           />
           <p> {props.postInfo.author.displayName}</p>
@@ -61,7 +61,7 @@ function Detail(props) {
           {props.postInfo.image ? (
             <img
               style={{ width: '100%', height: 'auto' }}
-              src={`http://localhost:4000/${props.postInfo.image}`}
+              src={`https://react-board-community.herokuapp.com/${props.postInfo.image}`}
               alt={props.postInfo.image}
             />
           ) : null}

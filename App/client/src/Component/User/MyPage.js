@@ -73,7 +73,7 @@ function MyPage() {
           <Avartar
             round={true}
             size="100"
-            src={`http://localhost:4000/${currentImage}`}
+            src={`https://react-board-community.herokuapp.com/${currentImage}`}
             style={{ border: '1px solid #c6c6c6', cursor: 'pointer' }}
           />
           {console.log(currentImage)}
