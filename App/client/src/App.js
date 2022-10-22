@@ -17,7 +17,6 @@ function App() {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(userInfo => {
-      console.log(userInfo);
       if (userInfo !== null) {
         dispatch(loginUser(userInfo.multiFactor.user));
       } else {
