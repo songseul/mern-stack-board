@@ -3,6 +3,11 @@
 ## 어플리케이션 실행 방법
 
 ```
+client
+- npm i
+- npm start
+
+server
 - npm i
 - npm start
 
