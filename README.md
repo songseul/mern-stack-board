@@ -19,4 +19,4 @@
 
 > 배포 사이트
 
-## [💙💙💙](https://magical-kringle-b05b00.netlify.app/)
+## [💙💙💙](http://react-board-community.herokuapp.com/)
