@@ -5,7 +5,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const app = express();
 const port = process.env.PORT || 4000;
-const config = require('./server/config/production.js');
+const config = require('./server/config/key.js');
 
 app.use(express.static(path.join(__dirname, './client/build')));
 app.use('/image', express.static('./image'));
